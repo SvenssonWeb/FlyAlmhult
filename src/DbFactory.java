@@ -33,7 +33,7 @@ public class DbFactory {
 					city.setId(rs.getInt("iID"));
 					city.setValues(rs.getString("sName"), rs.getInt("iCityID"));
 					
-					return category;
+					return city;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

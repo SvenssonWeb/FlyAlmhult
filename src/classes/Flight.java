@@ -8,6 +8,7 @@ public class Flight {
 	private int planeId;
 	private Timestamp departure;
 	private Timestamp arrival;
+	private String test;
 	/**
 	 * @return the id
 	 */

@@ -33,7 +33,7 @@ public class DbFactory {
 				City city = new City();
 				city.setId(rs.getInt("iID"));
 				city.setName(rs.getString("sName"));
-				city.setId(rs.getInt("iCityID"));
+				city.setCountry(rs.getString("sCountry"));
 
 				return city;
 			}
@@ -58,7 +58,7 @@ public class DbFactory {
 				airport.setName(rs.getString("sName"));
 
 				for (City city : getAllCities()) {
-					if (city.getId() == rs.getInt("iCityId")) {
+					if (city.getId() == rs.getInt("iCityID")) {
 						airport.setCity(city);
 					}
 				}
@@ -88,14 +88,14 @@ public class DbFactory {
 
 				// departAirport
 				for (Airport airport : getAllAirports()) {
-					if (airport.getId() == rs.getInt("iDepartID")) {
+					if (airport.getId() == rs.getInt("iDepartId")) {
 						route.setDepartAirport(airport);
 					}
 				}
 
 				// arriveAirport
 				for (Airport airport : getAllAirports()) {
-					if (airport.getId() == rs.getInt("iArriveID")) {
+					if (airport.getId() == rs.getInt("iArriveId")) {
 						route.setArriveAirport(airport);
 					}
 				}
@@ -126,14 +126,14 @@ public class DbFactory {
 
 				// Route
 				for (Route route : getAllRoutes()) {
-					if (route.getId() == rs.getInt("iRouteID")) {
+					if (route.getId() == rs.getInt("iRouteId")) {
 						flight.setRoute(route);
 					}
 				}
 
 				// Plane
 				for (Plane plane : getAllPlanes()) {
-					if (plane.getId() == rs.getInt("iplaneID")) {
+					if (plane.getId() == rs.getInt("iPlaneId")) {
 						flight.setPlane(plane);
 					}
 				}
@@ -213,7 +213,7 @@ public class DbFactory {
 
 				// City
 				for (City city : getAllCities()) {
-					if (city.getId() == rs.getInt("iCityId")) {
+					if (city.getId() == rs.getInt("iCityID")) {
 						airport.setCity(city);
 					}
 				}
@@ -267,14 +267,14 @@ public class DbFactory {
 
 				// Route
 				for (Route route : getAllRoutes()) {
-					if (route.getId() == rs.getInt("iRouteID")) {
+					if (route.getId() == rs.getInt("iRouteId")) {
 						flight.setRoute(route);
 					}
 				}
 
 				// Plane
 				for (Plane plane : getAllPlanes()) {
-					if (plane.getId() == rs.getInt("iplaneID")) {
+					if (plane.getId() == rs.getInt("iPlaneId")) {
 						flight.setPlane(plane);
 					}
 				}
@@ -423,7 +423,7 @@ public class DbFactory {
 			con = DriverManager.getConnection(url, user, password);
 
 			PreparedStatement prepStmt = con
-					.prepareStatement("INSERT INTO post (iRouteID, iPlaneID, tsDeparture, tsArrival) VALUES (?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO post (iRouteId, iPlaneId, tsDeparture, tsArrival) VALUES (?, ?, ?, ?)");
 			prepStmt.setInt(1, flight.getRoute().getId());
 			prepStmt.setInt(2, flight.getPlane().getId());
 			prepStmt.setTimestamp(3, flight.getDeparture());

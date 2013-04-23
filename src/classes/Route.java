@@ -2,8 +2,8 @@ package classes;
 
 public class Route {
 	private int id;
-	private City departCity;
-	private City arriveCity;
+	private Airport departAirport;
+	private Airport arriveAirport;
 	private int distance;
 	/**
 	 * @return the id
@@ -20,26 +20,26 @@ public class Route {
 	/**
 	 * @return the departCityId
 	 */
-	public City getDepartCity() {
-		return departCity;
+	public Airport getDepartAirport() {
+		return departAirport;
 	}
 	/**
 	 * @param departCityId the departCityId to set
 	 */
-	public void setDepartCity(City departCity) {
-		this.departCity = departCity;
+	public void setDepartAirport(Airport departAirport) {
+		this.departAirport = departAirport;
 	}
 	/**
 	 * @return the arriveCityId
 	 */
-	public City getArriveCity() {
-		return arriveCity;
+	public Airport getArriveAirport() {
+		return arriveAirport;
 	}
 	/**
 	 * @param arriveCityId the arriveCityId to set
 	 */
-	public void setArriveCity(City arriveCity) {
-		this.arriveCity = arriveCity;
+	public void setArriveAirport(Airport arriveAirport) {
+		this.arriveAirport = arriveAirport;
 	}
 	/**
 	 * @return the distance

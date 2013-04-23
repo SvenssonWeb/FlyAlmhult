@@ -12,11 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JList;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JMenuBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.EtchedBorder;
 
 
 public class MainWindow {
@@ -56,86 +55,12 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 567, 465);
+		frame.setBounds(100, 100, 567, 598);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-	
-		final JPanel panelRoute = new JPanel();
-		panelRoute.setBounds(65, 40, 302, 380);
-		frame.getContentPane().add(panelRoute);
-		panelRoute.setLayout(null);
-		
-		JLabel lblFlightRoute = new JLabel("Flight Route");
-		lblFlightRoute.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblFlightRoute.setBounds(10, 11, 113, 26);
-		panelRoute.add(lblFlightRoute);
-		
-		JLabel lblFlighter = new JLabel("Flight");
-		lblFlighter.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblFlighter.setBounds(10, 162, 97, 20);
-		panelRoute.add(lblFlighter);
-		
-		JComboBox comboBoxRouteFrom = new JComboBox();
-		comboBoxRouteFrom.setBounds(10, 59, 139, 20);
-		panelRoute.add(comboBoxRouteFrom);
-		
-		JComboBox comboBoxRouteTo = new JComboBox();
-		comboBoxRouteTo.setBounds(153, 59, 139, 20);
-		panelRoute.add(comboBoxRouteTo);
-		
-		JLabel lblFrn = new JLabel("Fr\u00E5n:");
-		lblFrn.setBounds(10, 41, 46, 17);
-		panelRoute.add(lblFrn);
-		
-		JLabel lblTill = new JLabel("Till:");
-		lblTill.setBounds(153, 42, 46, 14);
-		panelRoute.add(lblTill);
-		
-		JButton btnSaveRoute = new JButton("Spara");
-		btnSaveRoute.setBounds(216, 90, 76, 23);
-		panelRoute.add(btnSaveRoute);
-		
-		JComboBox comboBoxRoute = new JComboBox();
-		comboBoxRoute.setBounds(66, 193, 166, 20);
-		panelRoute.add(comboBoxRoute);
-		
-		JLabel lblFlygrutt = new JLabel("Flygrutt:");
-		lblFlygrutt.setBounds(10, 196, 46, 14);
-		panelRoute.add(lblFlygrutt);
-		
-		JComboBox comboBoxPlane = new JComboBox();
-		comboBoxPlane.setBounds(66, 219, 166, 20);
-		panelRoute.add(comboBoxPlane);
-		
-		JLabel lblFlygplan = new JLabel("Flygplan:");
-		lblFlygplan.setBounds(10, 222, 46, 14);
-		panelRoute.add(lblFlygplan);
-		
-		JLabel lblAvgng = new JLabel("Avg\u00E5ng:");
-		lblAvgng.setBounds(10, 253, 46, 14);
-		panelRoute.add(lblAvgng);
-		
-		JLabel lblAnkomst = new JLabel("Ankomst:");
-		lblAnkomst.setBounds(122, 253, 63, 14);
-		panelRoute.add(lblAnkomst);
-		
-		JButton btnSparaFlight = new JButton("Spara");
-		btnSparaFlight.setBounds(143, 278, 89, 23);
-		panelRoute.add(btnSparaFlight);
-		
-		textFieldDepartureTime = new JTextField();
-		textFieldDepartureTime.setBounds(66, 250, 46, 20);
-		panelRoute.add(textFieldDepartureTime);
-		textFieldDepartureTime.setColumns(10);
-		
-		textFieldArrivalTime = new JTextField();
-		textFieldArrivalTime.setBounds(186, 250, 46, 20);
-		panelRoute.add(textFieldArrivalTime);
-		textFieldArrivalTime.setColumns(10);
-		panelRoute.setVisible(false);
 				
 		final JPanel panelAirports = new JPanel();
-		panelAirports.setBounds(65, 40, 276, 380);
+		panelAirports.setBounds(65, 40, 276, 502);
 		frame.getContentPane().add(panelAirports);
 		panelAirports.setLayout(null);
 		panelAirports.setVisible(false);
@@ -176,6 +101,7 @@ public class MainWindow {
 		panelAirports.add(lblTillgngligaFlygplatser);
 		
 		JList listAirports = new JList();
+		listAirports.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		listAirports.setBounds(10, 193, 256, 94);
 		panelAirports.add(listAirports);
 		
@@ -185,39 +111,157 @@ public class MainWindow {
 		panelAirports.add(lblLggTillStder);
 		
 		textAddCity = new JTextField();
-		textAddCity.setBounds(10, 331, 162, 20);
+		textAddCity.setBounds(10, 331, 144, 20);
 		panelAirports.add(textAddCity);
 		textAddCity.setColumns(10);
 		
-		JButton btnAddCity = new JButton("L\u00E4gg till");
-		btnAddCity.setBounds(177, 330, 89, 23);
+		JButton btnAddCity = new JButton("L\u00E4gg till/\u00C4ndra");
+		btnAddCity.setBounds(155, 330, 111, 23);
 		panelAirports.add(btnAddCity);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 93, 21);
-		frame.getContentPane().add(menuBar);
+		JButton btnTaBortStad = new JButton("Ta bort stad");
+		btnTaBortStad.setBounds(166, 354, 100, 23);
+		panelAirports.add(btnTaBortStad);
 		
-		JMenu mnMeny = new JMenu("Meny");
-		menuBar.add(mnMeny);
+		JList listCities = new JList();
+		listCities.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		listCities.setBounds(10, 399, 256, 92);
+		panelAirports.add(listCities);
 		
-		JMenuItem mntmHanteraFlygplatser = new JMenuItem("Hantera flygplatser");
-		mntmHanteraFlygplatser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelAirports.setVisible(true);
-				panelRoute.setVisible(false);
-				
-			}
-		});
+		JLabel lblTillgngligaStder = new JLabel("Tillg\u00E4ngliga st\u00E4der");
+		lblTillgngligaStder.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTillgngligaStder.setBounds(10, 374, 152, 14);
+		panelAirports.add(lblTillgngligaStder);
 		
-		JMenuItem mntmHanteraFlygrutter = new JMenuItem("Hantera flygrutter");
-		mntmHanteraFlygrutter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelRoute.setVisible(true);
-				panelAirports.setVisible(false);
-			}
-		});
-		mnMeny.add(mntmHanteraFlygrutter);
-		mnMeny.add(mntmHanteraFlygplatser);
+		
+			final JPanel panelRoute = new JPanel();
+			panelRoute.setBounds(65, 40, 302, 502);
+			frame.getContentPane().add(panelRoute);
+			panelRoute.setLayout(null);
+			
+			JLabel lblFlightRoute = new JLabel("Flight Route");
+			lblFlightRoute.setFont(new Font("Tahoma", Font.BOLD, 16));
+			lblFlightRoute.setBounds(10, 11, 113, 26);
+			panelRoute.add(lblFlightRoute);
+			
+			JLabel lblFlighter = new JLabel("Flight");
+			lblFlighter.setFont(new Font("Tahoma", Font.BOLD, 16));
+			lblFlighter.setBounds(10, 257, 97, 20);
+			panelRoute.add(lblFlighter);
+			
+			JComboBox comboBoxRouteFrom = new JComboBox();
+			comboBoxRouteFrom.setBounds(10, 59, 139, 20);
+			panelRoute.add(comboBoxRouteFrom);
+			
+			JComboBox comboBoxRouteTo = new JComboBox();
+			comboBoxRouteTo.setBounds(153, 59, 139, 20);
+			panelRoute.add(comboBoxRouteTo);
+			
+			JLabel lblFrn = new JLabel("Fr\u00E5n:");
+			lblFrn.setBounds(10, 41, 46, 17);
+			panelRoute.add(lblFrn);
+			
+			JLabel lblTill = new JLabel("Till:");
+			lblTill.setBounds(153, 42, 46, 14);
+			panelRoute.add(lblTill);
+			
+			JButton btnSaveRoute = new JButton("Spara");
+			btnSaveRoute.setBounds(216, 90, 76, 23);
+			panelRoute.add(btnSaveRoute);
+			
+			JComboBox comboBoxRoute = new JComboBox();
+			comboBoxRoute.setBounds(66, 288, 226, 20);
+			panelRoute.add(comboBoxRoute);
+			
+			JLabel lblFlygrutt = new JLabel("Flygrutt:");
+			lblFlygrutt.setBounds(10, 291, 46, 14);
+			panelRoute.add(lblFlygrutt);
+			
+			JComboBox comboBoxPlane = new JComboBox();
+			comboBoxPlane.setBounds(66, 313, 226, 20);
+			panelRoute.add(comboBoxPlane);
+			
+			JLabel lblFlygplan = new JLabel("Flygplan:");
+			lblFlygplan.setBounds(10, 316, 46, 14);
+			panelRoute.add(lblFlygplan);
+			
+			JLabel lblAvgng = new JLabel("Avg\u00E5ng:");
+			lblAvgng.setBounds(10, 341, 46, 14);
+			panelRoute.add(lblAvgng);
+			
+			JLabel lblAnkomst = new JLabel("Ankomst:");
+			lblAnkomst.setBounds(163, 341, 63, 14);
+			panelRoute.add(lblAnkomst);
+			
+			JButton btnSparaFlight = new JButton("Spara");
+			btnSparaFlight.setBounds(203, 364, 89, 23);
+			panelRoute.add(btnSparaFlight);
+			
+			textFieldDepartureTime = new JTextField();
+			textFieldDepartureTime.setBounds(66, 338, 57, 20);
+			panelRoute.add(textFieldDepartureTime);
+			textFieldDepartureTime.setColumns(10);
+			
+			textFieldArrivalTime = new JTextField();
+			textFieldArrivalTime.setBounds(236, 338, 56, 20);
+			panelRoute.add(textFieldArrivalTime);
+			textFieldArrivalTime.setColumns(10);
+			
+			JList listRoutes = new JList();
+			listRoutes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			listRoutes.setBounds(10, 139, 282, 87);
+			panelRoute.add(listRoutes);
+			
+			JList listFlights = new JList();
+			listFlights.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			listFlights.setBounds(10, 418, 282, 73);
+			panelRoute.add(listFlights);
+			
+			JButton btnDeleteFlight = new JButton("Ta bort");
+			btnDeleteFlight.setBounds(110, 364, 89, 23);
+			panelRoute.add(btnDeleteFlight);
+			
+			JButton btnDeleteRoute = new JButton("Ta bort");
+			btnDeleteRoute.setBounds(117, 90, 89, 23);
+			panelRoute.add(btnDeleteRoute);
+			
+			JLabel lblTillgngligaRoutes = new JLabel("Tillg\u00E4ngliga Routes");
+			lblTillgngligaRoutes.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblTillgngligaRoutes.setBounds(10, 122, 113, 14);
+			panelRoute.add(lblTillgngligaRoutes);
+			
+			JLabel lblTillgngligaFlights = new JLabel("Tillg\u00E4ngliga Flights");
+			lblTillgngligaFlights.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblTillgngligaFlights.setBounds(10, 398, 123, 14);
+			panelRoute.add(lblTillgngligaFlights);
+			
+			
+			JMenuBar menuBar = new JMenuBar();
+			menuBar.setBounds(0, 0, 93, 21);
+			frame.getContentPane().add(menuBar);
+			
+			JMenu mnMeny = new JMenu("Meny");
+			menuBar.add(mnMeny);
+			
+			JMenuItem mntmHanteraFlygplatser = new JMenuItem("Hantera flygplatser");
+			mntmHanteraFlygplatser.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelAirports.setVisible(true);
+					panelRoute.setVisible(false);
+					
+				}
+			});
+			
+			JMenuItem mntmHanteraFlygrutter = new JMenuItem("Hantera flygrutter");
+			mntmHanteraFlygrutter.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelRoute.setVisible(true);
+					panelAirports.setVisible(false);
+				}
+			});
+			mnMeny.add(mntmHanteraFlygrutter);
+			mnMeny.add(mntmHanteraFlygplatser);
+			panelRoute.setVisible(false);
 		
 		
 	}

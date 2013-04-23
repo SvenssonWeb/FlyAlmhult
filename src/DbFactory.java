@@ -15,7 +15,7 @@ public class DbFactory {
 	private static Statement st = null;
 	private static ResultSet rs = null;
 
-	private static String url = "jdbc:mysql://flyalmhult-162050.mysql.binero.se:3306?useUnicode=true&characterEncoding=UTF-8";
+	private static String url = "jdbc:mysql://flyalmhult-162050.mysql.binero.se/162050-flyalmhult";
 	private static String user = "162050_gr60540";
 	private static String password = "hejsanalla";
 

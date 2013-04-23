@@ -3,7 +3,7 @@ package classes;
 public class Airport {
 	private int id;
 	private String name;
-	private int cityId;
+	private City city;
 	/**
 	 * @return the id
 	 */
@@ -31,14 +31,14 @@ public class Airport {
 	/**
 	 * @return the cityId
 	 */
-	public int getCityId() {
-		return cityId;
+	public City getCity() {
+		return city;
 	}
 	/**
 	 * @param cityId the cityId to set
 	 */
-	public void setCityId(int cityId) {
-		this.cityId = cityId;
+	public void setCity(City city) {
+		this.city = city;
 	}
 	
 	

@@ -4,11 +4,10 @@ import java.sql.Timestamp;
 
 public class Flight {
 	private int id;
-	private int routeId;
-	private int planeId;
+	private Route route;
+	private Plane plane;
 	private Timestamp departure;
 	private Timestamp arrival;
-	private String test;
 	/**
 	 * @return the id
 	 */
@@ -24,26 +23,26 @@ public class Flight {
 	/**
 	 * @return the routeId
 	 */
-	public int getRouteId() {
-		return routeId;
+	public Route getRoute() {
+		return route;
 	}
 	/**
 	 * @param routeId the routeId to set
 	 */
-	public void setRouteId(int routeId) {
-		this.routeId = routeId;
+	public void setRoute(Route route) {
+		this.route = route;
 	}
 	/**
 	 * @return the planeId
 	 */
-	public int getPlaneId() {
-		return planeId;
+	public Plane getPlane() {
+		return plane;
 	}
 	/**
 	 * @param planeId the planeId to set
 	 */
-	public void setPlaneId(int planeId) {
-		this.planeId = planeId;
+	public void setPlane(Plane plane) {
+		this.plane = plane;
 	}
 	/**
 	 * @return the departure

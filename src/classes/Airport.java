@@ -40,6 +40,11 @@ public class Airport {
 	public void setCity(City city) {
 		this.city = city;
 	}
+	public void setValues(String name, City city) {
+		// TODO Auto-generated method stub
+		this.name = name;
+		this.city = city;
+	}
 	
 	
 }

@@ -40,5 +40,16 @@ public class City {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	public void setValues(String name, int id) {
+		// TODO Auto-generated method stub
+		this.name = name;
+		this.id = id;
+	}
+	public void setValues(String name, int id, String country) {
+		// TODO Auto-generated method stub
+		this.name = name;
+		this.id = id;
+		this.country = country;
+	}
 	
 }

@@ -15,12 +15,12 @@ public class DbFactory {
 	private static Statement st = null;
 	private static ResultSet rs = null;
 	
-	//private static String url = "jdbc:mysql://db4free.net:3306/flyalmhult";
-	//private static String user = "flyalmhult";
-	//private static String password = "hejsanalla";
-	private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
-	private static String user = "root";
-	private static String password = "";
+	private static String url = "jdbc:mysql://db4free.net:3306/flyalmhult";
+	private static String user = "flyalmhult";
+	private static String password = "hejsanalla";
+	//private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
+	//private static String user = "root";
+	//private static String password = "";
 	
 	public static List<City> cities = new ArrayList<City>();
 	public static List<Airport> airports = new ArrayList<Airport>();
@@ -38,6 +38,26 @@ public class DbFactory {
 	}
 	
 	
+	//Function to check if password matches
+	public static boolean checkPassword(String userIn, String passIn){
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM user WHERE username =" + userIn);
+
+			if (rs.next()) {
+				passIn = rs.getString("password");
+
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 
 	
 	
@@ -320,7 +340,7 @@ public class DbFactory {
 
 				// Route
 				for (Route route : routes) {
-					if (route.getId() == rs.getInt("iRouteId")) {
+					if (route.getId() == rs.getInt("iRouteID")) {
 						flight.setRoute(route);
 					}
 				}
@@ -332,7 +352,7 @@ public class DbFactory {
 
 				// Plane
 				for (Plane plane : planes) {
-					if (plane.getId() == rs.getInt("iPlaneId")) {
+					if (plane.getId() == rs.getInt("iPlaneID")) {
 						flight.setPlane(plane);
 					}
 				}
@@ -486,7 +506,7 @@ public class DbFactory {
 			con = DriverManager.getConnection(url, user, password);
 
 			PreparedStatement prepStmt = con
-					.prepareStatement("INSERT INTO post (iRouteId, iPlaneId, tsDeparture, tsArrival) VALUES (?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO post (iRouteID, iPlaneID, tsDeparture, tsArrival) VALUES (?, ?, ?, ?)");
 			prepStmt.setInt(1, flight.getRoute().getId());
 			prepStmt.setInt(2, flight.getPlane().getId());
 			prepStmt.setTimestamp(3, flight.getDeparture());

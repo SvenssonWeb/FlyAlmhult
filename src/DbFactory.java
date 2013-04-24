@@ -15,12 +15,12 @@ public class DbFactory {
 	private static Statement st = null;
 	private static ResultSet rs = null;
 	
-	private static String url = "jdbc:mysql://db4free.net:3306/flyalmhult";
-	private static String user = "flyalmhult";
-	private static String password = "hejsanalla";
-	//private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
-	//private static String user = "root";
-	//private static String password = "";
+	//private static String url = "jdbc:mysql://db4free.net:3306/flyalmhult";
+	//private static String user = "flyalmhult";
+	//private static String password = "hejsanalla";
+	private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
+	private static String user = "root";
+	private static String password = "";
 	
 	public static List<City> cities = new ArrayList<City>();
 	public static List<Airport> airports = new ArrayList<Airport>();
@@ -487,7 +487,7 @@ public class DbFactory {
 			con = DriverManager.getConnection(url, user, password);
 
 			PreparedStatement prepStmt = con
-					.prepareStatement("INSERT INTO post (iDepartAirportID, iArriveAirportID, iDistance) VALUES (?, ?, ?)");
+					.prepareStatement("INSERT INTO route (iDepartAirportID, iArriveAirportID, iDistance) VALUES (?, ?, ?)");
 			prepStmt.setInt(1, route.getDepartAirport().getId());
 			prepStmt.setInt(2, route.getArriveAirport().getId());
 			prepStmt.setInt(3, route.getDistance());
@@ -506,7 +506,7 @@ public class DbFactory {
 			con = DriverManager.getConnection(url, user, password);
 
 			PreparedStatement prepStmt = con
-					.prepareStatement("INSERT INTO post (iRouteID, iPlaneID, tsDeparture, tsArrival) VALUES (?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO flight (iRouteID, iPlaneID, tsDeparture, tsArrival) VALUES (?, ?, ?, ?)");
 			prepStmt.setInt(1, flight.getRoute().getId());
 			prepStmt.setInt(2, flight.getPlane().getId());
 			prepStmt.setTimestamp(3, flight.getDeparture());

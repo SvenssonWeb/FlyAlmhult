@@ -15,10 +15,25 @@ public class DbFactory {
 	private static Statement st = null;
 	private static ResultSet rs = null;
 
-	private static String url = "jdbc:mysql://flyalmhult-162050.mysql.binero.se/162050-flyalmhult";
-	private static String user = "162050_gr60540";
-	private static String password = "hejsanalla";
-
+	private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
+	private static String user = "root";
+	private static String password = "";
+	
+	private static List<City> cities = new ArrayList<City>();
+	private static List<Airport> airports = new ArrayList<Airport>();
+	private static List<Route> routes = new ArrayList<Route>();
+	private static List<Flight> flights = new ArrayList<Flight>();
+	private static List<Plane> planes = new ArrayList<Plane>();
+	
+	//Fill the system (lists with data from the database)
+	public static void initiateSystem(){
+	    cities = getAllCities();
+		airports = getAllAirports();
+		routes = getAllRoutes();
+		flights = getAllFlights();
+		planes = getAllPlanes();
+	}
+	
 	/* --------- GET WITH ID ------------ */
 
 	// returns the city with that id
@@ -27,7 +42,7 @@ public class DbFactory {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM city WHERE id=" + id);
+			rs = st.executeQuery("SELECT * FROM city WHERE iID=" + id);
 
 			if (rs.next()) {
 				City city = new City();
@@ -50,14 +65,20 @@ public class DbFactory {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM airport WHERE id=" + id);
+			rs = st.executeQuery("SELECT * FROM airport WHERE iID=" + id);
 
 			if (rs.next()) {
 				Airport airport = new Airport();
 				airport.setId(rs.getInt("iID"));
 				airport.setName(rs.getString("sName"));
+				
+				//Cities
+				if ( cities.size() == 0 ) {
+					cities = getAllCities();
+				}
+				
 
-				for (City city : getAllCities()) {
+				for (City city : cities) {
 					if (city.getId() == rs.getInt("iCityID")) {
 						airport.setCity(city);
 					}
@@ -78,24 +99,29 @@ public class DbFactory {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM route WHERE id=" + id);
+			rs = st.executeQuery("SELECT * FROM route WHERE iID=" + id);
 
 			if (rs.next()) {
 				Route route = new Route();
 
 				route.setId(rs.getInt("iID"));
-				route.setId(rs.getInt("sDistance"));
+				route.setId(rs.getInt("iDistance"));
+				
+				//Airports
+				if ( airports.size() == 0 ) {
+					airports = getAllAirports();
+				}
 
 				// departAirport
-				for (Airport airport : getAllAirports()) {
-					if (airport.getId() == rs.getInt("iDepartId")) {
+				for (Airport airport : airports) {
+					if (airport.getId() == rs.getInt("iDepartAirportId")) {
 						route.setDepartAirport(airport);
 					}
 				}
 
 				// arriveAirport
-				for (Airport airport : getAllAirports()) {
-					if (airport.getId() == rs.getInt("iArriveId")) {
+				for (Airport airport : airports) {
+					if (airport.getId() == rs.getInt("iArriveAirportId")) {
 						route.setArriveAirport(airport);
 					}
 				}
@@ -115,7 +141,7 @@ public class DbFactory {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM flight WHERE id=" + id);
+			rs = st.executeQuery("SELECT * FROM flight WHERE iID=" + id);
 
 			if (rs.next()) {
 				Flight flight = new Flight();
@@ -123,17 +149,27 @@ public class DbFactory {
 				flight.setId(rs.getInt("iID"));
 				flight.setDeparture(rs.getTimestamp("tsDeparture"));
 				flight.setArrival(rs.getTimestamp("tsArrival"));
+				
+				//Routes
+				if ( routes.size() == 0 ) {
+					routes = getAllRoutes();
+				}
 
 				// Route
-				for (Route route : getAllRoutes()) {
-					if (route.getId() == rs.getInt("iRouteId")) {
+				for (Route route : routes) {
+					if (route.getId() == rs.getInt("iRouteID")) {
 						flight.setRoute(route);
 					}
 				}
+				
+				//Planes
+				if ( planes.size() == 0 ) {
+					planes = getAllPlanes();
+				}
 
 				// Plane
-				for (Plane plane : getAllPlanes()) {
-					if (plane.getId() == rs.getInt("iPlaneId")) {
+				for (Plane plane : planes) {
+					if (plane.getId() == rs.getInt("iPlaneID")) {
 						flight.setPlane(plane);
 					}
 				}
@@ -153,7 +189,7 @@ public class DbFactory {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM plane WHERE id=" + id);
+			rs = st.executeQuery("SELECT * FROM plane WHERE iID=" + id);
 
 			if (rs.next()) {
 				Plane plane = new Plane(rs.getInt("iID"),
@@ -176,7 +212,7 @@ public class DbFactory {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM user WHERE id=" + id);
+			rs = st.executeQuery("SELECT * FROM user WHERE iID=" + id);
 
 			if (rs.next()) {
 				User newUser = new User(rs.getInt("iID"),
@@ -210,9 +246,14 @@ public class DbFactory {
 				Airport airport = new Airport();
 				airport.setId(rs.getInt("iID"));
 				airport.setName(rs.getString("sName"));
+				
+				//Cities
+				if ( cities.size() == 0 ) {
+					cities = getAllCities();
+				}
 
 				// City
-				for (City city : getAllCities()) {
+				for (City city : cities) {
 					if (city.getId() == rs.getInt("iCityID")) {
 						airport.setCity(city);
 					}
@@ -264,16 +305,26 @@ public class DbFactory {
 				flight.setId(rs.getInt("iID"));
 				flight.setDeparture(rs.getTimestamp("tsDeparture"));
 				flight.setArrival(rs.getTimestamp("tsArrival"));
+				
+				//Routes
+				if ( routes.size() == 0 ) {
+					routes = getAllRoutes();
+				}
 
 				// Route
-				for (Route route : getAllRoutes()) {
+				for (Route route : routes) {
 					if (route.getId() == rs.getInt("iRouteId")) {
 						flight.setRoute(route);
 					}
 				}
+				
+				//Planes
+				if ( planes.size() == 0 ) {
+					planes = getAllPlanes();
+				}
 
 				// Plane
-				for (Plane plane : getAllPlanes()) {
+				for (Plane plane : planes) {
 					if (plane.getId() == rs.getInt("iPlaneId")) {
 						flight.setPlane(plane);
 					}
@@ -326,18 +377,23 @@ public class DbFactory {
 				Route route = new Route();
 
 				route.setId(rs.getInt("iID"));
-				route.setId(rs.getInt("distance"));
+				route.setId(rs.getInt("iDistance"));
+				
+				//Airports
+				if ( airports.size() == 0 ) {
+					airports = getAllAirports();
+				}
 
 				// departAirport
-				for (Airport airport : getAllAirports()) {
-					if (airport.getId() == rs.getInt("iDepartID")) {
+				for (Airport airport : airports) {
+					if (airport.getId() == rs.getInt("iDepartAirportID")) {
 						route.setDepartAirport(airport);
 					}
 				}
 
 				// arriveAirport
-				for (Airport airport : getAllAirports()) {
-					if (airport.getId() == rs.getInt("iArriveID")) {
+				for (Airport airport : airports) {
+					if (airport.getId() == rs.getInt("iArriveAirportID")) {
 						route.setArriveAirport(airport);
 					}
 				}
@@ -404,7 +460,7 @@ public class DbFactory {
 			con = DriverManager.getConnection(url, user, password);
 
 			PreparedStatement prepStmt = con
-					.prepareStatement("INSERT INTO post (iDepartID, iArriveID, iDistance) VALUES (?, ?, ?)");
+					.prepareStatement("INSERT INTO post (iDepartAirportID, iArriveAirportID, iDistance) VALUES (?, ?, ?)");
 			prepStmt.setInt(1, route.getDepartAirport().getId());
 			prepStmt.setInt(2, route.getArriveAirport().getId());
 			prepStmt.setInt(3, route.getDistance());

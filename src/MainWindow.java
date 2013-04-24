@@ -16,6 +16,9 @@ import javax.swing.JList;
 import javax.swing.JMenuBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.border.EtchedBorder;
 import classes.*;
 
@@ -28,6 +31,7 @@ public class MainWindow {
 	private JTextField textFieldArrivalTime;
 	private JTextField textUsername;
 	private JTextField textPassword;
+	private List<JPanel> Panels = new ArrayList<JPanel>();
 
 	/**
 	 * Launch the application.
@@ -62,10 +66,11 @@ public class MainWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panelLogIn = new JPanel();
+		final JPanel panelLogIn = new JPanel();
 		panelLogIn.setBounds(65, 39, 302, 246);
 		frame.getContentPane().add(panelLogIn);
 		panelLogIn.setLayout(null);
+		Panels.add(panelLogIn);
 		
 		textUsername = new JTextField();
 		textUsername.setBounds(26, 64, 215, 20);
@@ -78,7 +83,7 @@ public class MainWindow {
 		panelLogIn.add(lblLoggaIn);
 		
 		JLabel lblAnvndarnamn = new JLabel("Anv\u00E4ndarnamn:");
-		lblAnvndarnamn.setBounds(26, 49, 92, 14);
+		lblAnvndarnamn.setBounds(26, 49, 104, 14);
 		panelLogIn.add(lblAnvndarnamn);
 		
 		JLabel lblLsenord = new JLabel("L\u00F6senord:");
@@ -99,6 +104,7 @@ public class MainWindow {
 		frame.getContentPane().add(panelAirports);
 		panelAirports.setLayout(null);
 		panelAirports.setVisible(false);
+		Panels.add(panelAirports);
 		
 		JLabel lblHanteraFlygplatser = new JLabel("Hantera flygplatser");
 		lblHanteraFlygplatser.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -175,6 +181,7 @@ public class MainWindow {
 		panelRoute.setBounds(65, 40, 302, 502);
 		frame.getContentPane().add(panelRoute);
 		panelRoute.setLayout(null);
+		Panels.add(panelRoute);
 		
 		JLabel lblFlightRoute = new JLabel("Flight Route");
 		lblFlightRoute.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -285,8 +292,12 @@ public class MainWindow {
 		JMenuItem mntmHanteraFlygplatser = new JMenuItem("Hantera flygplatser");
 		mntmHanteraFlygplatser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < Panels.size(); i++) {
+					System.out.println(Panels.get(i).getName());
+				}
 				panelAirports.setVisible(true);
 				panelRoute.setVisible(false);
+				panelLogIn.setVisible(false);
 				
 			}
 		});
@@ -294,8 +305,11 @@ public class MainWindow {
 		JMenuItem mntmHanteraFlygrutter = new JMenuItem("Hantera flygrutter");
 		mntmHanteraFlygrutter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelRoute.setVisible(true);
-				panelAirports.setVisible(false);
+				if (loggedIn == true) {
+					panelRoute.setVisible(true);
+					panelAirports.setVisible(false);
+					panelLogIn.setVisible(false);
+				}
 			}
 		});
 		mnMeny.add(mntmHanteraFlygrutter);

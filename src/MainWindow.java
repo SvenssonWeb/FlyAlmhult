@@ -26,6 +26,8 @@ public class MainWindow {
 	private JTextField textAddCity;
 	private JTextField textFieldDepartureTime;
 	private JTextField textFieldArrivalTime;
+	private JTextField textUsername;
+	private JTextField textPassword;
 
 	/**
 	 * Launch the application.
@@ -59,6 +61,38 @@ public class MainWindow {
 		frame.setBounds(100, 100, 567, 598);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		JPanel panelLogIn = new JPanel();
+		panelLogIn.setBounds(65, 39, 302, 246);
+		frame.getContentPane().add(panelLogIn);
+		panelLogIn.setLayout(null);
+		
+		textUsername = new JTextField();
+		textUsername.setBounds(26, 64, 215, 20);
+		panelLogIn.add(textUsername);
+		textUsername.setColumns(10);
+		
+		JLabel lblLoggaIn = new JLabel("Logga in");
+		lblLoggaIn.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblLoggaIn.setBounds(10, 11, 82, 20);
+		panelLogIn.add(lblLoggaIn);
+		
+		JLabel lblAnvndarnamn = new JLabel("Anv\u00E4ndarnamn:");
+		lblAnvndarnamn.setBounds(26, 49, 92, 14);
+		panelLogIn.add(lblAnvndarnamn);
+		
+		JLabel lblLsenord = new JLabel("L\u00F6senord:");
+		lblLsenord.setBounds(26, 95, 92, 14);
+		panelLogIn.add(lblLsenord);
+		
+		textPassword = new JTextField();
+		textPassword.setBounds(26, 109, 215, 20);
+		panelLogIn.add(textPassword);
+		textPassword.setColumns(10);
+		
+		JButton btnLoggaIn = new JButton("Logga in");
+		btnLoggaIn.setBounds(152, 136, 89, 23);
+		panelLogIn.add(btnLoggaIn);
 				
 		final JPanel panelAirports = new JPanel();
 		panelAirports.setBounds(65, 40, 276, 502);

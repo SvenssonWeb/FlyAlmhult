@@ -14,10 +14,13 @@ public class DbFactory {
 	private static Connection con = null;
 	private static Statement st = null;
 	private static ResultSet rs = null;
-
-	private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
-	private static String user = "root";
-	private static String password = "";
+	
+	private static String url = "jdbc:mysql://db4free.net:3306/flyalmhult";
+	private static String user = "flyalmhult";
+	private static String password = "hejsanalla";
+	//private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
+	//private static String user = "root";
+	//private static String password = "";
 	
 	private static List<City> cities = new ArrayList<City>();
 	private static List<Airport> airports = new ArrayList<Airport>();
@@ -193,7 +196,7 @@ public class DbFactory {
 
 			if (rs.next()) {
 				Plane plane = new Plane(rs.getInt("iID"),
-						rs.getString("sName"), rs.getInt("sPassgengers"));
+						rs.getString("sName"), rs.getInt("iPassengers"));
 				plane.setCost(rs.getInt("iCost"));
 				plane.setSpeed(rs.getString("sSpeed"));
 
@@ -442,7 +445,7 @@ public class DbFactory {
 			con = DriverManager.getConnection(url, user, password);
 
 			PreparedStatement prepStmt = con
-					.prepareStatement("INSERT INTO post (sName, iCityID) VALUES (?, ?)");
+					.prepareStatement("INSERT INTO airport (sName, iCityID) VALUES (?, ?)");
 			prepStmt.setString(1, airport.getName());
 			prepStmt.setInt(2, airport.getCity().getId());
 

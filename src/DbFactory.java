@@ -15,26 +15,27 @@ public class DbFactory {
 	private static Statement st = null;
 	private static ResultSet rs = null;
 	
-	//private static String url = "jdbc:mysql://db4free.net:3306/flyalmhult";
-	//private static String user = "flyalmhult";
-	//private static String password = "hejsanalla";
-	private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
-	private static String user = "root";
-	private static String password = "";
+	private static String url = "jdbc:mysql://db4free.net:3306/flyalmhult";
+	private static String user = "flyalmhult";
+	private static String password = "hejsanalla";
+	//private static String url = "jdbc:mysql://localhost:3306/162050-flyalmhult";
+	//private static String user = "root";
+	//private static String password = "";
 	
 	public static List<City> cities = new ArrayList<City>();
 	public static List<Airport> airports = new ArrayList<Airport>();
 	public static List<Route> routes = new ArrayList<Route>();
-	public static List<Flight> flights = new ArrayList<Flight>();
 	public static List<Plane> planes = new ArrayList<Plane>();
+	public static List<Flight> flights = new ArrayList<Flight>();
 	
 	//Fill the system (lists with data from the database)
 	public static void initiateSystem(){
 	    cities = getAllCities();
 		airports = getAllAirports();
 		routes = getAllRoutes();
-		flights = getAllFlights();
 		planes = getAllPlanes();
+		flights = getAllFlights();
+		
 	}
 	
 	
